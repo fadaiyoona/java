@@ -1,4 +1,4 @@
-package com.mashibing.juc.c_021_02_AQS;
+package com.mashibing.juc.c_021_02_AQS.aqs2;
 
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
