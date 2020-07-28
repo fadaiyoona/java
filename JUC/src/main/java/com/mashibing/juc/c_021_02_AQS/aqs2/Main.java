@@ -3,7 +3,7 @@ package com.mashibing.juc.c_021_02_AQS.aqs2;
 import java.util.concurrent.locks.Lock;
 
 public class Main {
-    public static int m = 0;
+    public static /* volatile */ int m = 0;
     public static Lock lock = new MLock();
 
     public static void main(String[] args) throws Exception {
@@ -19,6 +19,16 @@ public class Main {
                 }
             });
         }
+
+        new Thread(() -> {
+            while (true) {
+                if (m == 5000) {
+                    System.out.println("m == 5000");
+                    System.out.println("new thread end...");
+                    return;
+                }
+            }
+        }).start();
 
         for(Thread t : threads) t.start();
 
