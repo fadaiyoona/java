@@ -24,17 +24,17 @@ public class MLock implements Lock {
 
     @Override
     public void lockInterruptibly() throws InterruptedException {
-
+        sync.acquireInterruptibly(1);
     }
 
     @Override
     public boolean tryLock() {
-        return false;
+        return sync.tryAcquire(1);
     }
 
     @Override
     public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
-        return false;
+        return sync.tryAcquireNanos(1, unit.toNanos(time));
     }
 
     @Override
