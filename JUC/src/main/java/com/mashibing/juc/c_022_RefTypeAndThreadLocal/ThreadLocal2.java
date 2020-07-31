@@ -17,6 +17,9 @@ public class ThreadLocal2 {
 	static ThreadLocal<Person> tl = new ThreadLocal<>();
 	
 	public static void main(String[] args) {
+		Person person = new Person();
+		person.name = "1";
+		tl.set(person);
 				
 		new Thread(()->{
 			try {
@@ -34,7 +37,9 @@ public class ThreadLocal2 {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			tl.set(new Person());
+			Person person2 = new Person();
+			person.name = "2";
+			tl.set(person2);
 		}).start();
 	}
 	

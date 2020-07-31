@@ -25,10 +25,11 @@ public class ThreadLocal1 {
 		new Thread(()->{
 			try {
 				TimeUnit.SECONDS.sleep(1);
+				p.name = "lisi";
+				TimeUnit.SECONDS.sleep(5);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			p.name = "lisi";
 		}).start();
 	}
 }

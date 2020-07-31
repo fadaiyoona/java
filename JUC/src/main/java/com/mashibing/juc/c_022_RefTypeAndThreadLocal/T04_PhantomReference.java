@@ -19,8 +19,6 @@
  *     DirectByteBuffer就是通过虚引用来实现堆外内存的释放的。
  *
  */
-
-
 package com.mashibing.juc.c_022_RefTypeAndThreadLocal;
 
 import java.lang.ref.PhantomReference;
@@ -29,17 +27,19 @@ import java.lang.ref.ReferenceQueue;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 只是为了给个对象回收的通知
+ * 当有对象回收时，作出相应的处理
+ * 如DirectByteBuffer，直接被虚拟机内存管理，又被称为堆外内存
+ * 当Queue检测到时，进行清理堆外内存
+ */
 public class T04_PhantomReference {
     private static final List<Object> LIST = new LinkedList<>();
     private static final ReferenceQueue<M> QUEUE = new ReferenceQueue<>();
 
-
-
     public static void main(String[] args) {
-
-
+        // 触发对象回收时，回收的对象回被丢到QUEUE队列中
         PhantomReference<M> phantomReference = new PhantomReference<>(new M(), QUEUE);
-
 
         new Thread(() -> {
             while (true) {
@@ -50,6 +50,7 @@ public class T04_PhantomReference {
                     e.printStackTrace();
                     Thread.currentThread().interrupt();
                 }
+                // 虚引用拿不到这里面的值
                 System.out.println(phantomReference.get());
             }
         }).start();
