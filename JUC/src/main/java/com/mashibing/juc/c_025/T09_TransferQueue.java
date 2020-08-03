@@ -13,11 +13,9 @@ public class T09_TransferQueue {
 				e.printStackTrace();
 			}
 		}).start();
-		
 		strs.transfer("aaa");
 		
 		//strs.put("aaa");
-
 
 		/*new Thread(() -> {
 			try {
@@ -26,7 +24,5 @@ public class T09_TransferQueue {
 				e.printStackTrace();
 			}
 		}).start();*/
-
-
 	}
 }
