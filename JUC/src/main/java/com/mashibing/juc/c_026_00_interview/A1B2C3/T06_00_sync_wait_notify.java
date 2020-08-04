@@ -11,8 +11,8 @@ public class T06_00_sync_wait_notify {
         new Thread(()->{
             synchronized (o) {
                 for(char c : aI) {
-                    System.out.print(c);
                     try {
+                        System.out.print(c);
                         o.notify();
                         o.wait(); //让出锁
                     } catch (InterruptedException e) {
@@ -28,8 +28,8 @@ public class T06_00_sync_wait_notify {
         new Thread(()->{
             synchronized (o) {
                 for(char c : aC) {
-                    System.out.print(c);
                     try {
+                        System.out.print(c);
                         o.notify();
                         o.wait();
                     } catch (InterruptedException e) {
