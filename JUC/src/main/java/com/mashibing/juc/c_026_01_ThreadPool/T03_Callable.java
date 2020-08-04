@@ -17,6 +17,24 @@ public class T03_Callable {
 
         ExecutorService service = Executors.newCachedThreadPool();
         Future<String> future = service.submit(c); //Òì²½
+        Future future1 = service.submit(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("hello runnable");
+            }
+        });
+
+        service.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.currentThread().sleep(10000);
+                    System.out.println("------sleep over-------");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         System.out.println(future.get());//×èÈû
 
