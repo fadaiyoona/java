@@ -1,7 +1,5 @@
 package com.java.jdkproxy;
 
-import java.lang.reflect.Proxy;
-
 /**
  * @author zl(952999)
  * @description:
@@ -11,12 +9,13 @@ import java.lang.reflect.Proxy;
 public class Main01 {
 
     public static void main(String[] args) throws Exception {
-        // 传入三大参数，就能够创建出一个代理对象
-        HelloWorldService helloWorld = (HelloWorldService) Proxy.newProxyInstance(
-                Main01.class.getClassLoader(),
-                new Class<?>[]{HelloWorldService.class},
-                //此处目标实现为HelloWorldImpl
-                new JdkInvocationHandler(new HelloWorldServiceImpl()));
-        helloWorld.sayHello();
+        // 实例化一个需要代理的对象
+        HelloWorldService helloWorldService = new HelloWorldServiceImpl();
+        // 实例化InvocationHandler
+        JdkInvocationProxy jdkInvocationProxy = new JdkInvocationProxy(helloWorldService);
+        // 根据目标对象生成代理对象
+        HelloWorldService proxy = (HelloWorldService) jdkInvocationProxy.getProxy();
+        // 调用代理对象方法
+        proxy.sayHello();
     }
 }

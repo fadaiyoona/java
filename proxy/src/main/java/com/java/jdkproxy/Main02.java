@@ -17,7 +17,7 @@ public class Main02 {
         // 3、new一个InvocationHandler实例~~~
         Class<?> proxyClass = Proxy.getProxyClass(Main02.class.getClassLoader(), HelloWorldService.class);
         Constructor<?> cons = proxyClass.getConstructor(InvocationHandler.class);
-        InvocationHandler ih = new JdkInvocationHandler(new HelloWorldServiceImpl());
+        InvocationHandler ih = new JdkInvocationProxy(new HelloWorldServiceImpl());
 
         // 通过构造函数 new出一个实例
         HelloWorldService helloWorld = (HelloWorldService) cons.newInstance(ih);
